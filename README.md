@@ -20,6 +20,10 @@
     - Create User Model
     - Configure Passport
 
+- Part III
+    - Add Register routes
+    - Add Register Form
+    
 # Notes on Authentication
 ## Introduction to Auth
 - Tools
