@@ -28,6 +28,10 @@
     - Add Login route
     - Add Login form
 
+- Part V
+    - Add Logout route
+    - Add isLoggedIn middleware
+
 # Notes on Authentication
 ## Introduction to Auth
 - Tools

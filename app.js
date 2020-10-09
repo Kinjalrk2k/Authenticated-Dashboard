@@ -18,8 +18,6 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(
   require("express-session")({
     secret: "Rusty is the best and cutest dog in the world",
@@ -27,6 +25,8 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -38,8 +38,8 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/dashboard", (req, res) => {
-  res.render("dashboard");
+app.get("/dashboard", isLoggedIn, (req, res) => {
+  res.render("dashboard", {user: req.user});
 });
 
 // Auth routes
@@ -64,7 +64,6 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
-// middleware
 app.post(
   "/login",
   passport.authenticate("local", {
@@ -73,6 +72,19 @@ app.post(
   }),
   (req, res) => {}
 );
+
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
+// middleware
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, function () {
