@@ -1,6 +1,20 @@
 # Authenticated Dashboard
 
 
+# Objectives
+- Part I
+    - Set up the folder structure
+    - Install needed packages
+        - `express`
+        - `mongoose`
+        - `ejs`
+        - `body-parser`
+        - `passport`
+        - `passport-local`
+        - `passport-local-mongoose`
+        - `express-session`
+    - Add root route and template
+    - Add dashboard(secret) route and template
 
 # Notes on Authentication
 ## Introduction to Auth
