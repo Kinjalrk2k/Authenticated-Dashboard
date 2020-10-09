@@ -1,5 +1,23 @@
-<h1>This is the homepage</h1>
+<%- include('partials/header'); %>
 
-<li><a href="/register">Sign Up!</a></li>
-<li><a href="/login">Login!</a></li>
-<li><a href="/logout">Logout!</a></li>
+<div class="container">
+  <div class="jumbotron mt-5 text-center">
+    <h1 class="display-4">Authenticated Dashboard!</h1>
+    <p class="lead">Just a simple dashboard which is authenticated using <code>Passport-Local Strategy</code></p>
+    <h5>
+      <span class="badge badge-pill badge-primary">NodeJS</span>
+      <span class="badge badge-pill badge-warning">EJS templating</span>
+      <span class="badge badge-pill badge-secondary">ExpressJS and Express-Session</span>
+      <span class="badge badge-pill badge-success">MongoDB & Mongoose</span>
+      <span class="badge badge-pill badge-danger">PassportJS with Passport-local Strategy</span>
+    </h5>
+    <hr class="my-4">
+    <p class="text-muted">Stuffs are very limited here! This is just a reference repository for future implementations of authentication!</p>
+    <div class="row justify-content-center">
+      <div class="col-3"><a class="btn btn-primary btn-lg" href="/register" role="button">Register</a></div>
+      <div class="col-3"><a class="btn btn-primary btn-lg" href="/login" role="button">Login</a></div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer'); %>
