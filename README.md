@@ -22,8 +22,12 @@
 
 - Part III
     - Add Register routes
-    - Add Register Form
-    
+    - Add Register form
+
+- Part IV
+    - Add Login route
+    - Add Login form
+
 # Notes on Authentication
 ## Introduction to Auth
 - Tools
@@ -38,3 +42,8 @@
     - Serializations: `UserSchema.plugin(passportLocalMongoose);` adds the methods `.deserializeUser()` and `.serializeUser()` to the `UserSchema` which is then exported.
         - `passport.deserializeUser(User.deserializeUser());`: Reading the encoded data from the session, un-encoding it
         - `passport.serializeUser(User.serializeUser());`: Encoding Data and putting it back to the session
+
+- Middleware: 
+    - Some code which runs before the final route callback
+    - Multiple middlewares can be stacked up
+    - They sit between the starting of the route and ending of the route (hence the name middleware)

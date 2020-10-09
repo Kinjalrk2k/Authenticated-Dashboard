@@ -28,6 +28,7 @@ app.use(
   })
 );
 
+passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -58,6 +59,20 @@ app.post("/register", (req, res) => {
     });
   });
 });
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+// middleware
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/login",
+  }),
+  (req, res) => {}
+);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, function () {
