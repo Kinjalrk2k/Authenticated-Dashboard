@@ -32,6 +32,12 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// user defined middleware - this makes req.user variable available to all the routes and templates
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 /** ROUTES */
 
 app.get("/", (req, res) => {
@@ -39,7 +45,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/dashboard", isLoggedIn, (req, res) => {
-  res.render("dashboard", {user: req.user});
+  res.render("dashboard");
 });
 
 // Auth routes
