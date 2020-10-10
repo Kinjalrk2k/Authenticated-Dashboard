@@ -1,5 +1,7 @@
 # Authenticated Dashboard
+Just a simple dashboard which is authenticated using `Passport-Local` Strategy. Stuffs are very limited here! This is just a reference repository for future implementations of authentication!
 
+> This is a part of Colt Steele's The Web Developer Bootcamp Course on Udemy Section 34: Authentication
 
 # Objectives
 - Part I
