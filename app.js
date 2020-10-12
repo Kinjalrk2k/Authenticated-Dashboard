@@ -1,5 +1,6 @@
 const express = require("express"),
   mongoose = require("mongoose"),
+  flash = require("connect-flash"),
   passport = require("passport"),
   bodyParser = require("body-parser"),
   localStrategy = require("passport-local"),
@@ -17,10 +18,12 @@ mongoose
 const app = express();
 app.set("view engine", "ejs");
 
+app.use(flash());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   require("express-session")({
-    secret: "Rusty is the best and cutest dog in the world",
+    secret: "That's a secret! ;)",
     resave: false,
     saveUninitialized: false,
   })
@@ -35,6 +38,8 @@ passport.deserializeUser(User.deserializeUser());
 // user defined middleware - this makes req.user variable available to all the routes and templates
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
   next();
 });
 
@@ -75,6 +80,8 @@ app.post(
   passport.authenticate("local", {
     successRedirect: "/dashboard",
     failureRedirect: "/login",
+    successFlash: "Logged you in!",
+    failureFlash: "Incorrect credentials!",
   }),
   (req, res) => {}
 );
@@ -89,6 +96,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
+  req.flash("error", "You need to be logged in to do that!");
   res.redirect("/login");
 }
 
